@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStop.Web", "GameStop.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStop.WebAdmin", "GameStop.WebAdmin\GameStop.WebAdmin.csproj", "{AE22A6BE-893E-4395-9D28-401E8072AF8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuieroPizza.Win", "QuieroPizza.Win\QuieroPizza.Win.csproj", "{FCEDF884-FD4A-4C3B-8562-BAD70ECCA62F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStop.Win", "QuieroPizza.Win\GameStop.Win.csproj", "{FCEDF884-FD4A-4C3B-8562-BAD70ECCA62F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStop.BL", "GameStop.BL\GameStop.BL.csproj", "{1813DFFB-062B-4D71-8ABB-93B1647EBA6B}"
 EndProject
