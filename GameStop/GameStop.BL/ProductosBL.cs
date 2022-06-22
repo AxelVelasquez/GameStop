@@ -20,7 +20,9 @@ namespace GameStop.BL
 
         public List<Producto> ObtenerProductos()
         {
-            ListadeProductos = _contexto.Productos.ToList();
+            ListadeProductos = _contexto.Productos
+                .Include("Categoria")
+                .ToList();
             return ListadeProductos;
         }
 
@@ -34,6 +36,7 @@ namespace GameStop.BL
             {
                 var productoExistente = _contexto.Productos.Find(producto.Id);
                 productoExistente.Descripcion = producto.Descripcion;
+                productoExistente.CategoriaId = producto.CategoriaId;
                 productoExistente.Precio = producto.Precio;
             }
             _contexto.SaveChanges();
@@ -41,7 +44,8 @@ namespace GameStop.BL
 
         public Producto ObtenerProducto(int id)
         {
-            var producto = _contexto.Productos.Find(id);
+            var producto = _contexto.Productos
+                .Include("Categoria").FirstOrDefault(p => p.Id == id);
             return producto;
         }
 
