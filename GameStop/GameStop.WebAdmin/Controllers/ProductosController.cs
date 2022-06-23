@@ -30,7 +30,7 @@ namespace GameStop.WebAdmin.Controllers
         {
             var nuevoProducto = new Producto();
             var Categorias = _categoriasBL.ObtenerCategorias();
-            ViewBag.CategoriaId = new SelectList(Categorias, "Id", "Descripción");
+            ViewBag.ListaCategorias = new SelectList(Categorias, "Id", "Descripción");
             return View(nuevoProducto);
         }
 
@@ -55,6 +55,8 @@ namespace GameStop.WebAdmin.Controllers
         public ActionResult Editar(int id)
         {
             var producto = _productosBL.ObtenerProducto(id);
+            var categorias = _categoriasBL.ObtenerCategorias();
+            ViewBag.CategoriaId = new SelectList(categorias, "Id", "Descripcion", producto.CategoriaId);
             return View(producto);
         }
 
@@ -72,7 +74,7 @@ namespace GameStop.WebAdmin.Controllers
                 return RedirectToAction("Index");
             }
             var categorias = _categoriasBL.ObtenerCategorias();
-            ViewBag.CategoriaId = new SelectList(categorias, "Id", "Descripción");
+            ViewBag.CategoriaId = new SelectList(categorias, "Id", "Descripción", producto.CategoriaId);
             return View(producto);
         }
 
@@ -80,12 +82,15 @@ namespace GameStop.WebAdmin.Controllers
         {
             var producto = _productosBL.ObtenerProducto(id);
 
+
             return View(producto);
         }
 
         public ActionResult Eliminar(int id)
         {
             var producto = _productosBL.ObtenerProducto(id);
+
+           
 
             return View(producto);
         }
