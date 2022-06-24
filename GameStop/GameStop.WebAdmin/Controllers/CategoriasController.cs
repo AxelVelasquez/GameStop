@@ -9,51 +9,28 @@ namespace GameStop.WebAdmin.Controllers
 {
     public class CategoriasController : Controller
     {
-        CategoriasBL _categoriasBL;
+        CategoriaBL _categoriaBL;
 
         public CategoriasController()
         {
-            _categoriasBL = new CategoriasBL();
+            _categoriaBL = new CategoriaBL();
         }
-
-        // GET: Productos
+        // GET: Categorias
         public ActionResult Index()
         {
-            var listadeCategorias = _categoriasBL.ObtenerCategorias();
-
-            return View(listadeCategorias);
+            var listadeProductos = _categoriaBL.ObtenerProductos();
+            return View(listadeProductos);
         }
 
         public ActionResult Crear()
         {
-            var nuevaCategoria = new Categoria();
-            return View(nuevaCategoria);
+            var nuevoProducto = new Producto();
+
+            return View(nuevoProducto);
         }
 
         [HttpPost]
-        public ActionResult Crear(Categoria categoria)
-        {
-            if (ModelState.IsValid)
-            {
-                if(categoria.Descripcion != categoria.Descripcion.Trim())
-                {
-                    ModelState.AddModelError("Descripcion", "La descripción no debe contener espacios al inicio o al final");
-                    return View(categoria);
-                }
-                _categoriasBL.GuardarCategoria(categoria);
-                return RedirectToAction("Index");
-            }
-            return View(categoria);
-        }
-
-        public ActionResult Editar(int id)
-        {
-            var producto = _categoriasBL.ObtenerCategoria(id);
-            return View(producto);
-        }
-
-        [HttpPost]
-        public ActionResult Editar(Categoria categoria)
+        public ActionResult Crear(Producto categoria)
         {
             if (ModelState.IsValid)
             {
@@ -62,29 +39,45 @@ namespace GameStop.WebAdmin.Controllers
                     ModelState.AddModelError("Descripcion", "La descripción no debe contener espacios al inicio o al final");
                     return View(categoria);
                 }
-                _categoriasBL.GuardarCategoria(categoria);
+                _categoriaBL.GuardarProducto(categoria);
                 return RedirectToAction("Index");
             }
             return View(categoria);
         }
 
-        public ActionResult Detalle(int id)
+        public ActionResult Editar(int id)
         {
-            var producto = _categoriasBL.ObtenerCategoria(id);
-            return View(producto);
-        }
+            var producto = _categoriaBL.ObtenerProducto(id);
 
-        public ActionResult Eliminar(int id)
-        {
-            var producto = _categoriasBL.ObtenerCategoria(id);
             return View(producto);
         }
 
         [HttpPost]
-        public ActionResult Eliminar(Categoria producto)
+        public ActionResult Editar(Producto producto)
         {
-            _categoriasBL.EliminarCategoria(producto.Id);
+            _categoriaBL.GuardarProducto(producto);
+
             return RedirectToAction("Index");
         }
+        public ActionResult Detalle(int id)
+        {
+            var producto = _categoriaBL.ObtenerProducto(id);
+            return View(producto);
+        }
+        public ActionResult Eliminar(int id)
+        {
+            var producto = _categoriaBL.ObtenerProducto(id);
+            return View(producto);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(Producto producto)
+        {
+            _categoriaBL.EliminarProducto(producto.Id);
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }

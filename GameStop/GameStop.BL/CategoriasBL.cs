@@ -6,49 +6,57 @@ using System.Threading.Tasks;
 
 namespace GameStop.BL
 {
-    public class CategoriasBL
+    public class CategoriaBL
     {
         Contexto _contexto;
+        public List<Producto> ListadeProductos { get; set; }
 
-        public List<Categoria> ListadeCategorias { get; set; }
-
-        public CategoriasBL()
+        public CategoriaBL()
         {
             _contexto = new Contexto();
-            ListadeCategorias = new List<Categoria>();
+            ListadeProductos = new List<Producto>();
+        }
+        public List<Producto> ObtenerProductos()
+        {
+            ListadeProductos = _contexto.Productos.ToList();
+            return ListadeProductos;
         }
 
-        public List<Categoria> ObtenerCategorias()
+        public void GuardarProducto(Producto producto)
         {
-            ListadeCategorias = _contexto.Categorias.ToList();
-            return ListadeCategorias;
-        }
-
-        public void GuardarCategoria(Categoria categoria)
-        {
-            if (categoria.Id == 0)
+            if (producto.Id == 0)
             {
-                _contexto.Categorias.Add(categoria);
+                _contexto.Productos.Add(producto);
             }
             else
             {
-                var categoriaExistente = _contexto.Categorias.Find(categoria.Id);
-                categoriaExistente.Descripcion = categoria.Descripcion;
+                var productoExistente = _contexto.Productos.Find(producto.Id);
+                productoExistente.Descripcion = producto.Descripcion;
+                productoExistente.Precio = producto.Precio;
             }
+
             _contexto.SaveChanges();
         }
 
-        public Categoria ObtenerCategoria(int id)
+        public Producto ObtenerProducto(int id)
         {
-            var categoria = _contexto.Categorias.Find(id);
-            return categoria;
+            var producto = _contexto.Productos.Find(id);
+
+            return producto;
+
         }
 
-        public void EliminarCategoria(int id)
+        public void EliminarProducto(int id)
         {
-            var categoria = _contexto.Categorias.Find(id);
-            _contexto.Categorias.Remove(categoria);
+            var producto = _contexto.Productos.Find(id);
+            _contexto.Productos.Remove(producto);
             _contexto.SaveChanges();
+        }
+        public List<Producto> ObtenerCategorias()
+        {
+            ListadeProductos = _contexto.Productos.ToList();
+            return ListadeProductos;
         }
     }
+
 }

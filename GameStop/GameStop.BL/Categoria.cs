@@ -11,7 +11,7 @@ namespace GameStop.BL
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Ingrese la categoría")]
+        [Required(ErrorMessage = "Ingrese la categoria")]
         public string Descripcion { get; set; }
     }
 }

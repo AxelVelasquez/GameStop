@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GameStop.BL
 {
-    class Contexto: DbContext
+    public class Contexto : DbContext
     {
-        public Contexto(): base(@"Data Source=(LocalDb)\MSSQLLocalDB;AttachDBFilename="+
-            Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\GameStopDB.mdf")
+        public Contexto() : base(@"Data Source=(LocalDb)\MSSQLLocalDB;AttachDBFilename=" +
+            Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\GameStop.mdf")
         {
 
         }
@@ -20,7 +20,6 @@ namespace GameStop.BL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-         
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
     }
